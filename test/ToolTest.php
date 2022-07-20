@@ -15,6 +15,7 @@ class ToolTest extends TestCase
 
     public function testStrContains(): void
     {
+        var_dump(str_contains("abc", "a")); //true
         var_dump(Str::str_contains("abc", "a")); //true
         var_dump(Str::str_contains("abc", "d")); //false
         var_dump(Str::str_contains("abc", "")); //true
