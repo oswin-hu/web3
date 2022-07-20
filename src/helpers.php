@@ -9,7 +9,7 @@
 
 use Web3\Tool\Str;
 
-if (function_exists('str_contains')) {
+if (!function_exists('str_contains')) {
     /**
      * 检查另一个字符串中是否包含一个字符串，返回布尔值
      *
@@ -23,7 +23,7 @@ if (function_exists('str_contains')) {
     }
 }
 
-if (function_exists('str_starts_with')) {
+if (!function_exists('str_starts_with')) {
     /**
      * 检查一个字符串是否以另一个字符串开头,返回布尔值
      *
@@ -37,7 +37,7 @@ if (function_exists('str_starts_with')) {
     }
 }
 
-if (function_exists('str_ends_with')) {
+if (!function_exists('str_ends_with')) {
     /**
      * 检查一个字符串是否以另一个字符串结尾,返回布尔值
      *

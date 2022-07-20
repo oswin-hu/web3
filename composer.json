@@ -22,12 +22,12 @@
         "phpunit/phpunit": "~6.0"
     },
     "autoload": {
-        "psr-4": {
-            "Web3\\": "src/"
-        },
         "files": [
             "src/helpers.php"
-        ]
+        ],
+        "psr-4": {
+            "Web3\\": "src/"
+        }
     },
     "config": {
         "sort-packages": true
