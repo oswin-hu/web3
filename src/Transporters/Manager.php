@@ -40,12 +40,10 @@ class Manager
     }
 
 
-    public function getTransporter():? Client
+    public function getTransporter(): ?Client
     {
         if (is_null($this->client)) {
-            if (strpos($this->host, '127')){
-
-            }
+            $this->client = new Client();
         }
 
         return $this->client;
@@ -69,5 +67,22 @@ class Manager
     public function getTimeout(): float
     {
         return $this->timeout;
+    }
+
+    /**
+     * 请求参数
+     * @param  array  $body
+     * @return array
+     */
+    final public function options(array $body): array
+    {
+        return [
+            'headers'         => [
+                'content-type' => 'application/json'
+            ],
+            'body'            => $body,
+            'timeout'         => $this->getTimeout(),
+            'connect_timeout' => $this->getTimeout()
+        ];
     }
 }
