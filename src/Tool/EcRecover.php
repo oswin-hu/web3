@@ -30,13 +30,25 @@ class EcRecover
     }
 
     /**
+     * @param  string  $msg
+     * @param  string  $signed
+     * @return string
+     * @throws Exception
+     */
+    public static function eth_ecRecover(string $msg, string $signed): string
+    {
+        $hex = self::keccak256($msg);
+        return self::ecRecover($hex, $signed);
+    }
+
+    /**
      * @param  string  $str
      * @return string
      * @throws Exception
      */
     public static function keccak256(string $str): string
     {
-        return '0x'.Keccak::hash($str, 256);
+        return Str::add0x(Keccak::hash($str, 256));
     }
 
     /**
