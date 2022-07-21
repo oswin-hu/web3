@@ -23,7 +23,9 @@
         "kornrunner/keccak": "^1.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "simplito/elliptic-php": "^1.0",
-        "ext-gmp": "*"
+        "phpseclib/phpseclib": "^3.0.13",
+        "ext-gmp": "*",
+        "ext-bcmath": "*"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
