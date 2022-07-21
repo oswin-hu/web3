@@ -1,7 +1,14 @@
 {
     "name": "oswin.hu/web3",
     "description": "web3 是使用PHP开发的通用的以太坊RPC交互的api客户端",
-    "keywords": ["php", "web3", "ethereum", "json-rpc", "api", "client"],
+    "keywords": [
+        "php",
+        "web3",
+        "ethereum",
+        "json-rpc",
+        "api",
+        "client"
+    ],
     "homepage": "https://github.com/oswin-hu/web3",
     "license": "MIT",
     "authors": [
@@ -15,7 +22,8 @@
         "oswin.hu/crypto": "^1.0",
         "kornrunner/keccak": "^1.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "simplito/elliptic-php": "^1.0"
+        "simplito/elliptic-php": "^1.0",
+        "ext-gmp": "*"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",

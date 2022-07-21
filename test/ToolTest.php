@@ -8,6 +8,7 @@
 
 namespace Test;
 
+use Web3\Tool\Ecrecover;
 use Web3\Tool\Str;
 
 class ToolTest extends TestCase
@@ -41,6 +42,29 @@ class ToolTest extends TestCase
         var_dump(Str::str_ends_with("a", ""));//true
         var_dump(Str::str_ends_with("", ""));//true
         var_dump(Str::str_ends_with("", "a"));//false
+        $this->assertTrue(true);
+    }
+
+    public function testRemove0x(): void
+    {
+        $signed = '0x7b87a3c4dd63bee43d4c880391bb0aaaf210c12356406152a30edc424b9c4de62cc64a266b6faf22691a36489651f1cbf7dee1f028ba24b7d48e5552eac4c93f1b';
+        var_dump(Str::remove0x($signed));
+        $this->assertTrue(true);
+    }
+
+    public function testAdd0x(): void
+    {
+        $signed = '0x7b87a3c4dd63bee43d4c880391bb0aaaf210c12356406152a30edc424b9c4de62cc64a266b6faf22691a36489651f1cbf7dee1f028ba24b7d48e5552eac4c93f1b';
+        var_dump(Str::add0x($signed));
+        $this->assertTrue(true);
+    }
+
+    public function testPersonalEcRecover(): void
+    {
+        $pubkey = '0x86d38a0879b51afcd79c85e589ba6572c482b344';
+        $msg = '0h01eh2unzm3ei4v';
+        $signed = '0x5b3c6c934c15080bb91326e85925f47694a8beec0c23a862cf687fdde6a76a2d440b47d87d049939ef17ecac9d1cd4279bbee0aeabe310db21e033bce81ee2cc1b';
+        echo Ecrecover::personal_ecRecover($msg, $signed), "\n";
         $this->assertTrue(true);
     }
 
