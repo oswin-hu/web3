@@ -8,7 +8,7 @@
  */
 namespace Web3\Transporters;
 
-interface IHttpManager
+interface IRpc
 {
     public function request(string $method, array $params = []);
 }

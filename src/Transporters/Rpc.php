@@ -8,7 +8,7 @@
 
 namespace Web3\Transporters;
 
-class Rpc extends Manager implements IHttpManager
+class Rpc extends Manager implements IRpc
 {
 
     public function request(string $method, array $params = [])
