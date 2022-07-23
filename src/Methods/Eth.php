@@ -11,4 +11,13 @@ namespace Web3\Methods;
 final class Eth
 {
 
+    public function coinbase(): string
+    {
+        return __FUNCTION__;
+    }
+
+    public function __call($name, $arguments)
+    {
+       return 'call'.$name;
+    }
 }

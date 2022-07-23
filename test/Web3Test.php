@@ -8,6 +8,7 @@
 
 namespace Test;
 
+use Web3\Methods\Eth;
 use Web3\Transporters\Rpc;
 use Web3\Web3;
 
@@ -15,7 +16,9 @@ class Web3Test extends TestCase
 {
     public function testWeb3(): void
     {
-        var_dump($this->web3);
+        $this->web3->eth_coinbase();
         $this->assertTrue(true);
     }
 }
+
+

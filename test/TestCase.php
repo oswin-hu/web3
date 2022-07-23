@@ -35,10 +35,10 @@ class TestCase extends BaseTestCase
      */
     protected string $coinbase;
 
-    public function setUp()
+    public function setUp():void
     {
         $this->web3 = new Web3($this->testRinkebyHost);
-        var_dump($this->web3->eth->coinbase());
+        $this->coinbase = $this->web3->eth->coinbase();
     }
 
 

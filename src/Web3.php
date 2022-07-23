@@ -24,12 +24,12 @@ class Web3
     /**
      * @var Eth|null
      */
-    public ?Eth $eth = null;
+    protected ?Eth $eth = null;
 
     /**
      * @var Net|null
      */
-    public ?Net $net = null;
+    protected ?Net $net = null;
 
     /**
      * construct
@@ -96,27 +96,56 @@ class Web3
 
     public function __call($name, $arguments)
     {
-        $class = explode('\\', __CLASS__);
-        echo $class;
-        exit;
+        echo $name."\n";
+        print_r(__CLASS__);
     }
 
+    /**
+     * get
+     *
+     * @param $name
+     * @return mixed
+     */
     public function __get($name)
     {
         $method = 'get'.ucfirst($name);
 
-        if (method_exists($this, $method)){
+        if (method_exists($this, $method)) {
             return call_user_func_array([$this, $method], []);
         }
+
+        throw new \RuntimeException('The method does not exist');
     }
 
+    /**
+     * isset
+     *
+     * @param $name
+     * @return bool
+     */
     public function __isset($name)
     {
+        $method = 'get'.ucfirst($name);
+        return method_exists($this, $method);
 
     }
 
+
+    /**
+     * set
+     *
+     * @param $name
+     * @param $value
+     * @return mixed
+     */
     public function __set($name, $value)
     {
         $method = 'set'.ucfirst($name);
+
+        if (method_exists($this, $method)) {
+            return $this->$method($value);
+        }
+
+        throw new \RuntimeException('The method does not exist');
     }
 }
