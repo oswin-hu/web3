@@ -8,11 +8,13 @@
 
 namespace Web3\Methods;
 
-final class Eth
+final class Eth extends Method
 {
+
 
     public function coinbase(): string
     {
+        print_r($this->request(__FUNCTION__));
         return __FUNCTION__;
     }
 

@@ -75,7 +75,7 @@ class Web3
     public function getEth(): ?Eth
     {
         if (is_null($this->eth)) {
-            $this->eth = new Eth();
+            $this->eth = new Eth($this->provider);
         }
         return $this->eth;
     }
@@ -88,7 +88,7 @@ class Web3
     public function getNet(): ?Net
     {
         if (is_null($this->net)) {
-            $this->net = new Net();
+            $this->net = new Net($this->provider);
         }
 
         return $this->net;
@@ -96,8 +96,7 @@ class Web3
 
     public function __call($name, $arguments)
     {
-        echo $name."\n";
-        print_r(__CLASS__);
+        print_r($this->provider->getManager()->request($name));
     }
 
     /**

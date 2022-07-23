@@ -10,6 +10,4 @@ namespace Web3\Providers;
 
 interface IProvider
 {
-
-    public function send($method);
 }

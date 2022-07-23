@@ -8,7 +8,7 @@
 
 namespace Web3\Methods;
 
-final class Net
+final class Net extends Method
 {
 
 }

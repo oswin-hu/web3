@@ -13,11 +13,4 @@ use Web3\Transporters\Manager;
 class HttpProvider extends Provider implements IProvider
 {
 
-    protected array $method = [];
-
-
-    public function send($method)
-    {
-
-    }
 }

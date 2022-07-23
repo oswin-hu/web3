@@ -14,5 +14,6 @@ class Rpc extends Manager implements IRpc
     public function request(string $method, array $params = [])
     {
         $options = $this->options($params);
+        print_r($options);
     }
 }
