@@ -12,14 +12,4 @@ final class Eth extends Method
 {
 
 
-    public function coinbase(): string
-    {
-        print_r($this->request(__FUNCTION__));
-        return __FUNCTION__;
-    }
-
-    public function __call($name, $arguments)
-    {
-       return 'call'.$name;
-    }
 }

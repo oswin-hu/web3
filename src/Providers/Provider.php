@@ -8,14 +8,14 @@
 
 namespace Web3\Providers;
 
-use Web3\Transporters\Manager;
+use Web3\Transporters\Transporter;
 
 class Provider
 {
     /**
-     * @var Manager
+     * @var Transporter
      */
-    protected Manager $manager;
+    protected Transporter $transporter;
 
     /**
      * @var string
@@ -27,18 +27,18 @@ class Provider
      */
     protected int $id = 0;
 
-    public function __construct(Manager $manager)
+    public function __construct(Transporter $transporter)
     {
-        $this->manager = $manager;
+        $this->$transporter = $transporter;
     }
 
 
     /**
-     * @return Manager
+     * @return Transporter
      */
-    public function getManager(): Manager
+    public function getTransporter(): Transporter
     {
-        return $this->manager;
+        return $this->transporter;
     }
 
 

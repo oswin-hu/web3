@@ -21,6 +21,7 @@
         "php": ">=7.4",
         "ext-gmp": "*",
         "ext-bcmath": "*",
+        "ext-json": "*",
         "oswin.hu/crypto": "^1.0",
         "kornrunner/keccak": "^1.0",
         "guzzlehttp/guzzle": "^7.0.1",

@@ -8,6 +8,16 @@
 
 namespace Web3\Providers;
 
+use Web3\Methods\Method;
+
 interface IProvider
 {
+
+    /**
+     * 發送請求
+     *
+     * @param  Method  $method
+     * @return mixed
+     */
+    public function send(Method $method);
 }

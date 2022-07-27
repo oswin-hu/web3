@@ -8,9 +8,20 @@
 
 namespace Web3\Providers;
 
-use Web3\Transporters\Manager;
+use JsonException;
+use Web3\Methods\Method;
 
 class HttpProvider extends Provider implements IProvider
 {
+    /**
+     * @param  Method  $method
+     * @return mixed
+     * @throws JsonException
+     */
+    public function send(Method $method)
+    {
+        $payload = $method->toPayloadString();
+        return $this->transporter->request($payload);
+    }
 
 }

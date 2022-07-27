@@ -10,7 +10,7 @@ namespace Web3\Transporters;
 
 use GuzzleHttp\Client;
 
-class Manager
+class Transporter
 {
 
     /**
@@ -25,7 +25,9 @@ class Manager
      */
     protected float $timeout;
 
-
+    /**
+     * @var Client|null
+     */
     protected ?Client $client = null;
 
     /**
@@ -71,10 +73,10 @@ class Manager
 
     /**
      * 请求参数
-     * @param  array  $body
+     * @param  string  $body
      * @return array
      */
-    final public function options(array $body): array
+    final public function options(string $body): array
     {
         return [
             'headers'         => [

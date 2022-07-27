@@ -8,11 +8,12 @@
 
 namespace Web3;
 
+use RuntimeException;
 use Web3\Methods\Eth;
 use Web3\Methods\Net;
 use Web3\Providers\HttpProvider;
 use Web3\Providers\Provider;
-use Web3\Transporters\Rpc;
+use Web3\Transporters\Http;
 
 class Web3
 {
@@ -39,8 +40,7 @@ class Web3
     public function __construct($provider)
     {
         if (is_string($provider) && (filter_var($provider, FILTER_VALIDATE_URL)) && preg_match('/^https?:\/\//', $provider) === 1) {
-            $manager        = new Rpc($provider);
-            $this->provider = new HttpProvider($manager);
+            $this->provider = new HttpProvider(new Http($provider));
         } elseif ($provider instanceof Provider) {
             $this->provider = $provider;
         }
@@ -96,7 +96,26 @@ class Web3
 
     public function __call($name, $arguments)
     {
-        print_r($this->provider->getManager()->request($name));
+        if (preg_match('/^(eth|net)_+[a-zA-Z\d]+$/', $name) === 1) {
+            [$class, $method] = explode('_', $name);
+            $class = $this->get($class);
+            if (method_exists($class, $method)){
+                return $class->$method($arguments);
+            }
+            throw new RuntimeException('There is no '.$method.' method in the '.$class.' class');
+        }
+    }
+
+
+    public function get(string $name)
+    {
+        $method = 'get'.ucfirst($name);
+
+        if (method_exists($this, $method)) {
+            return call_user_func_array([$this, $method], []);
+        }
+
+        throw new RuntimeException('The method does not exist');
     }
 
     /**
@@ -107,13 +126,7 @@ class Web3
      */
     public function __get($name)
     {
-        $method = 'get'.ucfirst($name);
-
-        if (method_exists($this, $method)) {
-            return call_user_func_array([$this, $method], []);
-        }
-
-        throw new \RuntimeException('The method does not exist');
+        return $this->get($name);
     }
 
     /**
@@ -126,7 +139,6 @@ class Web3
     {
         $method = 'get'.ucfirst($name);
         return method_exists($this, $method);
-
     }
 
 
@@ -145,6 +157,6 @@ class Web3
             return $this->$method($value);
         }
 
-        throw new \RuntimeException('The method does not exist');
+        throw new RuntimeException('The method does not exist');
     }
 }

@@ -8,32 +8,125 @@
 
 namespace Web3\Methods;
 
-use Web3\Providers\Provider;
-use Web3\Transporters\Manager;
+use JsonException;
 
 class Method
 {
-    /**
-     * @var Manager
-     */
-    protected Manager $transporter;
 
     /**
-     * @var Provider
+     * @var string
      */
-    protected Provider $provider;
+    protected string $method = '';
 
-    public function __construct(Provider $provider)
+    /**
+     * @var string
+     */
+    protected string $rpcVersion = '2.0';
+
+    /**
+     * @var int
+     */
+    protected int $id = 0;
+
+    /**
+     * @var array
+     */
+    protected array $arguments = [];
+
+
+    public function __construct(string $method, array $arguments = [])
     {
-        $this->transporter = $provider->getManager();
+        $this->method    = $method;
+        $this->arguments = $arguments;
     }
 
     /**
-     * @param $method
-     * @param  array  $params
-     * @return mixed
+     * set id
+     *
+     * @param  int  $id
+     * @return void
      */
-    final public function send($method, array $params= []){
-        return $this->transporter->request($method, $params);
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * get id
+     *
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+
+    /**
+     * get rpc version
+     *
+     * @return string
+     */
+    public function getRpcVersion(): string
+    {
+        return $this->rpcVersion;
+    }
+
+    /**
+     * get method
+     *
+     * @return string
+     */
+    public function getMethod(): string
+    {
+        return $this->method;
+    }
+
+    /**
+     * set arguments
+     *
+     * @param  array  $arguments
+     * @return void
+     */
+    public function setArguments(array $arguments): void
+    {
+        $this->arguments = $arguments;
+    }
+
+    /**
+     * get arguments
+     *
+     * @return array
+     */
+    public function getArguments(): array
+    {
+        return $this->arguments;
+    }
+
+    /**
+     * toPayload
+     *
+     * @return array
+     */
+    public function toPayload(): array
+    {
+        return [
+            'id'      => $this->id ?: mt_rand(),
+            'jsonrpc' => $this->rpcVersion,
+            'method'  => $this->method,
+            'params'  => $this->arguments
+        ];
+    }
+
+    /**
+     * toPayloadJson
+     *
+     * @return string
+     * @throws JsonException
+     */
+    public function toPayloadString(): string
+    {
+        $payload = $this->toPayload();
+        return (string)json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
     }
 }

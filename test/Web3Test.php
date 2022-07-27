@@ -9,7 +9,7 @@
 namespace Test;
 
 use Web3\Methods\Eth;
-use Web3\Transporters\Rpc;
+use Web3\Transporters\Http;
 use Web3\Web3;
 
 class Web3Test extends TestCase
@@ -19,6 +19,7 @@ class Web3Test extends TestCase
         $this->web3->eth_coinbase();
         $this->assertTrue(true);
     }
+
 }
 
 
