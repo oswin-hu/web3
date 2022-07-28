@@ -8,125 +8,56 @@
 
 namespace Web3\Methods;
 
-use JsonException;
 
-class Method
+class Method extends JsonRCP implements IMethod
 {
 
     /**
-     * @var string
-     */
-    protected string $method = '';
-
-    /**
-     * @var string
-     */
-    protected string $rpcVersion = '2.0';
-
-    /**
-     * @var int
-     */
-    protected int $id = 0;
-
-    /**
+     * inputFormatters
+     *
      * @var array
      */
-    protected array $arguments = [];
-
-
-    public function __construct(string $method, array $arguments = [])
-    {
-        $this->method    = $method;
-        $this->arguments = $arguments;
-    }
+    protected array $inputFormatters = [];
 
     /**
-     * set id
+     * outputFormatters
      *
-     * @param  int  $id
-     * @return void
+     * @var array
      */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
+    protected array $outputFormatters = [];
 
     /**
-     * get id
-     *
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-
-    /**
-     * get rpc version
-     *
-     * @return string
-     */
-    public function getRpcVersion(): string
-    {
-        return $this->rpcVersion;
-    }
-
-    /**
-     * get method
-     *
-     * @return string
-     */
-    public function getMethod(): string
-    {
-        return $this->method;
-    }
-
-    /**
-     * set arguments
-     *
-     * @param  array  $arguments
-     * @return void
-     */
-    public function setArguments(array $arguments): void
-    {
-        $this->arguments = $arguments;
-    }
-
-    /**
-     * get arguments
+     * getInputFormatters
      *
      * @return array
      */
-    public function getArguments(): array
+    public function getInputFormatters(): array
     {
-        return $this->arguments;
+        return $this->inputFormatters;
     }
 
     /**
-     * toPayload
+     * getOutputFormatters
      *
      * @return array
      */
-    public function toPayload(): array
+    public function getOutputFormatters(): array
     {
-        return [
-            'id'      => $this->id ?: mt_rand(),
-            'jsonrpc' => $this->rpcVersion,
-            'method'  => $this->method,
-            'params'  => $this->arguments
-        ];
+        return $this->outputFormatters;
     }
 
     /**
-     * toPayloadJson
-     *
-     * @return string
-     * @throws JsonException
+     * @inheritdoc
      */
-    public function toPayloadString(): string
+    public function transform(array $data, array $format): array
     {
-        $payload = $this->toPayload();
-        return (string)json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
+        foreach ($data as $k => $v) {
+            if (isset($format[$k])) {
+                $formatted = call_user_func([$format[$k], 'format'], $data);
+                $data[$k]  = $formatted;
+            }
+        }
+
+        return $data;
     }
 }

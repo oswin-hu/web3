@@ -16,9 +16,8 @@ class Web3Test extends TestCase
 {
     public function testWeb3(): void
     {
-        $this->web3->eth_coinbase();
-        $this->web3->eth->coinbse();
-        $this->web3->eth->eth_coinbase();
+        $this->web3->clientVersion();
+        $this->web3->eth->coinbase();
         $this->assertTrue(true);
     }
 
