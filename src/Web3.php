@@ -40,7 +40,8 @@ class Web3
     public function __construct($provider)
     {
         if (is_string($provider) && (filter_var($provider, FILTER_VALIDATE_URL)) && preg_match('/^https?:\/\//', $provider) === 1) {
-            $this->provider = new HttpProvider(new Http($provider));
+            $http = new Http($provider);
+            $this->provider = new HttpProvider($http);
         } elseif ($provider instanceof Provider) {
             $this->provider = $provider;
         }

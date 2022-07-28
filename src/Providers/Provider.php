@@ -29,7 +29,7 @@ class Provider
 
     public function __construct(Transporter $transporter)
     {
-        $this->$transporter = $transporter;
+        $this->transporter = $transporter;
     }
 
 
