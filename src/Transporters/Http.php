@@ -41,7 +41,7 @@ class Http extends Transporter implements Ihttp
         }
 
         if (array_key_exists('error', $response)) {
-            throw new ErrorException($response['error']);
+            throw new ErrorException($response['error']['message'], $response['error']['code']);
         }
 
         return $response['result'];

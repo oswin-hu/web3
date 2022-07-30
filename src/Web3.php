@@ -71,18 +71,4 @@ class Web3 extends Web3Base
         return $this->personal;
     }
 
-
-
-//    public function __call($name, $arguments)
-//    {
-//        if (preg_match('/^(web3|personal|eth|net)_+[a-zA-Z\d]+$/', $name) === 1) {
-//            [$class, $method] = explode('_', $name);
-//            $class = $this->get($class);
-//            if (method_exists($class, $method)) {
-//                return $class->$method($arguments);
-//            }
-//            throw new RuntimeException('There is no '.$method.' method in the '.$class.' class');
-//        }
-//    }
-
 }
