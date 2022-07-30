@@ -55,7 +55,7 @@ class Str
      */
     public static function remove0x(string $value): string
     {
-        return self::str_starts_with($value, '0x') ? substr($value, 2) : $value;
+        return self::isZeroPrefixed($value) ? substr($value, 2) : $value;
     }
 
     /**
@@ -66,5 +66,25 @@ class Str
     public static function add0x(string $value): string
     {
         return '0x'.self::remove0x($value);
+    }
+
+    /**
+     * 是否零前缀
+     * @param string $value
+     * @return bool
+     */
+    public static function isZeroPrefixed(string $value):bool{
+         return self::str_starts_with($value, '0x');
+    }
+
+    /**
+     * stripZero
+     *
+     * @param string $value
+     * @return string
+     */
+    public static function stripZero(string $value):string
+    {
+        return self::remove0x($value);
     }
 }
