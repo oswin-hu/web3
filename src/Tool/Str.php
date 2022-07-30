@@ -15,8 +15,8 @@ class Str
     /**
      * 检查另一个字符串中是否包含一个字符串，返回布尔值
      *
-     * @param  string  $haystack
-     * @param  string  $needle
+     * @param string $haystack
+     * @param string $needle
      * @return bool
      */
     public static function str_contains(string $haystack, string $needle): bool
@@ -27,8 +27,8 @@ class Str
     /**
      * 检查一个字符串是否以另一个字符串开头,返回布尔值
      *
-     * @param  string  $haystack
-     * @param  string  $needle
+     * @param string $haystack
+     * @param string $needle
      * @return bool
      */
     public static function str_starts_with(string $haystack, string $needle): bool
@@ -39,8 +39,8 @@ class Str
     /**
      * 检查一个字符串是否以另一个字符串结尾,返回布尔值
      *
-     * @param  string  $haystack
-     * @param  string  $needle
+     * @param string $haystack
+     * @param string $needle
      * @return bool
      */
     public static function str_ends_with(string $haystack, string $needle): bool
@@ -49,8 +49,8 @@ class Str
     }
 
     /**
-     * 移除0x
-     * @param  string  $value
+     * 移除零叉前缀
+     * @param string $value
      * @return string
      */
     public static function remove0x(string $value): string
@@ -59,32 +59,44 @@ class Str
     }
 
     /**
-     * 添加前缀
-     * @param  string  $value
+     * 添加零叉前缀
+     * @param string $value
      * @return string
      */
     public static function add0x(string $value): string
     {
-        return '0x'.self::remove0x($value);
+        return '0x' . self::remove0x($value);
     }
 
     /**
-     * 是否零前缀
+     * 是否零叉前缀
      * @param string $value
      * @return bool
      */
-    public static function isZeroPrefixed(string $value):bool{
-         return self::str_starts_with($value, '0x');
+    public static function isZeroPrefixed(string $value): bool
+    {
+        return self::str_starts_with($value, '0x');
     }
 
     /**
-     * stripZero
+     * 剥离零叉前缀
      *
      * @param string $value
      * @return string
      */
-    public static function stripZero(string $value):string
+    public static function stripZero(string $value): string
     {
         return self::remove0x($value);
+    }
+
+    /**
+     * 是否负数
+     *
+     * @param string $value
+     * @return bool
+     */
+    public static function isNegative(string $value): bool
+    {
+        return self::str_starts_with($value, '-');
     }
 }
