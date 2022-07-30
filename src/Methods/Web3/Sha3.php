@@ -8,9 +8,13 @@
 
 namespace Web3\Methods\Web3;
 
+use Web3\Formatters\HexFormatter;
 use Web3\Methods\Method;
 
 class Sha3 extends Method
 {
 
+    protected array $inputFormatters = [
+        HexFormatter::class
+    ];
 }
