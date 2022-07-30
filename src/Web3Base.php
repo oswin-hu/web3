@@ -8,7 +8,9 @@
 
 namespace Web3;
 
+use JsonException;
 use RuntimeException;
+use Web3\Methods\Method;
 use Web3\Providers\HttpProvider;
 use Web3\Providers\Provider;
 use Web3\Transporters\Http;
@@ -58,9 +60,12 @@ class Web3Base
     }
 
     /**
+     *
+     *
      * @param $name
      * @param $arguments
      * @return void
+     * @throws JsonException
      */
     public function __call($name, $arguments)
     {
@@ -68,14 +73,24 @@ class Web3Base
             throw new RuntimeException('Please set provider first.');
         }
 
+
         if (preg_match('/^(web3|personal|eth|net)_+[a-zA-Z\d]+$/', $name) === 1){
             $method = $name;
+            [$prefix, $name] = explode('_', $method);
         } else {
             $class = explode('\\', static::class);
             $method = strtolower($class[1]).'_'.$name;
+            $prefix = $class[1];
         }
 
+        $className = sprintf("Web3\Methods\%s\%s", ucfirst($prefix), ucfirst($name));
+        if (class_exists($className) === false){
+            $className = Method::class;
+        }
 
+        $classMethod = new $className($method, $arguments);
+
+        return $this->provider->send($classMethod);
     }
 
     /**
