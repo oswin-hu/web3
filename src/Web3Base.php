@@ -23,6 +23,11 @@ class Web3Base
     protected Provider $provider;
 
     /**
+     * @var array
+     */
+    protected array $allowedMethods = [];
+
+    /**
      * __construct
      *
      * @param $provider
@@ -83,13 +88,18 @@ class Web3Base
             $prefix = $class[1];
         }
 
+        if (in_array($method, $this->allowMethods, true) === false) {
+            throw new RuntimeException('The method eth_coinbase does not exist/is not available');
+        }
+
         $className = sprintf("Web3\Methods\%s\%s", ucfirst($prefix), ucfirst($name));
         if (class_exists($className) === false){
             $className = Method::class;
         }
 
         $classMethod = new $className($method, $arguments);
-
+        $inputs = $classMethod->transform($arguments, $classMethod->getInputFormatters());
+        $classMethod->setArguments($inputs);
         return $this->provider->send($classMethod);
     }
 

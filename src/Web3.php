@@ -28,7 +28,10 @@ class Web3 extends Web3Base
      */
     protected ?Personal $personal = null;
 
-
+    protected array $allowedMethods = [
+        'web3_clientVersion',
+        'web3_sha3'
+    ];
 
     /**
      * getEth
