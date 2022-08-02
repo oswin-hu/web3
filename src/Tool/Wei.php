@@ -165,8 +165,7 @@ final class Wei
      */
     private static function mul(string $value): string
     {
-        $bigInteger = (new BigInteger($value))->multiply(new BigInteger(1000000000000000000));
-
+        $bigInteger = Utils::toWei($value, 'ether');
         return self::format($bigInteger->toString());
     }
 

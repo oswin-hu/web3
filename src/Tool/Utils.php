@@ -45,7 +45,18 @@ class Utils
         'tether'     => '1000000000000000000000000000000'
     ];
 
-    public static function toWei($number, $unit)
+    /**
+     * toWei
+     * Change number from unit to wei.
+     * For example:
+     * $wei = Utils::toWei('1', 'kwei');
+     * $wei->toString(); // 1000
+     *
+     * @param $number
+     * @param $unit
+     * @return BigNumber
+     */
+    public static function toWei($number, $unit): BigNumber
     {
         if (!is_string($number) && !($number instanceof BigNumber)) {
             throw new InvalidArgumentException('toWei number must be string or bignumber.');
@@ -57,7 +68,6 @@ class Utils
         if (!isset(self::UNITS[$unit])) {
             throw new InvalidArgumentException('toWei doesn\'t support '.$unit.' unit.');
         }
-
         $bn  = self::toBn($number);
         $bnt = new BigNumber(self::UNITS[$unit]);
         if (is_array($bn)) {
@@ -76,22 +86,25 @@ class Utils
                     $powerBase = bcpow('10', (string)$fractionLength, 10);
                     break;
                 default:
-                    $powerBase = pow(10, (int)$fractionLength);
+                    $powerBase = 10 ** (int)$fractionLength;
             }
             $base = new BigNumber($powerBase);
             $fraction = $fraction->multiply($bnt)->divide($base)[0];
 
-            if ($negative1 !== false) {
+            if (!is_null($negative1)) {
                 return $whole->add($fraction)->multiply($negative1);
             }
-            return  $whole->add($fraction);
+            return $whole->add($fraction);
         }
 
-        return  $bn->multiply($bnt);
+        return $bn->multiply($bnt);
     }
 
-
-    public static function toBn($number)
+    /**
+     * @param $number
+     * @return array|BigNumber
+     */
+    private static function toBn($number)
     {
         if ($number instanceof BigNumber) {
             $bn = $number;
@@ -118,7 +131,7 @@ class Utils
                     new BigNumber($whole),
                     new BigNumber($fraction),
                     strlen($fraction),
-                    $negative1 ?? false
+                    $negative1 ?? null
                 ];
 
             }
@@ -130,7 +143,6 @@ class Utils
             }
         } elseif (is_string($number)) {
             $number = mb_strtolower($number);
-
             if (Str::isNegative($number)) {
                 $count     = 1;
                 $number    = str_replace('-', '', $number, $count);

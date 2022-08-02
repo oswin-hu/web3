@@ -95,7 +95,8 @@ class ToolTest extends TestCase
 
     public function testToWei(): void
     {
-        $wei = new Wei(1);
+//        var_dump(gmp_init('0x0de0b6b3a7640000'));
+        $wei = Wei::fromEth('0x0de0b6b3a7640000');
         var_dump($wei->toEth());
         $this->assertTrue(true);
     }
