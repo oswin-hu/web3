@@ -11,4 +11,9 @@ namespace Web3;
 final class Eth extends Web3Base
 {
 
+    protected array $allowedMethods = [
+        'net_version',
+        'net_peerCount',
+        'net_listening'
+    ];
 }

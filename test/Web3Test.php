@@ -16,8 +16,18 @@ class Web3Test extends TestCase
 {
     public function testWeb3(): void
     {
+        $res = $this->web3->clientVersion();
+        var_dump($res);
+        $res = $this->web3->web3_clientVersion();
+        var_dump($res);
+        $this->assertTrue(true);
+    }
+
+    public function testSha3():void{
         $res = $this->web3->sha3('hello world');
-        print_r($res);
+        var_dump($res);
+        $res = $this->web3->web3_sha3('hello world');
+        var_dump($res);
         $this->assertTrue(true);
     }
 
