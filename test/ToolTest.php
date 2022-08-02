@@ -10,6 +10,7 @@ namespace Test;
 
 use Web3\Tool\Ecrecover;
 use Web3\Tool\Str;
+use Web3\Tool\Utils;
 use Web3\Tool\Wei;
 
 class ToolTest extends TestCase
@@ -63,7 +64,7 @@ class ToolTest extends TestCase
     public function testPersonalEcRecover(): void
     {
         $pubkey = '0x86d38a0879b51afcd79c85e589ba6572c482b344';
-        $msg = '0h01eh2unzm3ei4v';
+        $msg    = '0h01eh2unzm3ei4v';
         $signed = '0x5b3c6c934c15080bb91326e85925f47694a8beec0c23a862cf687fdde6a76a2d440b47d87d049939ef17ecac9d1cd4279bbee0aeabe310db21e033bce81ee2cc1b';
         var_dump(strcmp($pubkey, Ecrecover::personal_ecRecover($msg, $signed)) === 0);
         $this->assertTrue(true);
@@ -72,7 +73,7 @@ class ToolTest extends TestCase
     public function testEthEcRecover(): void
     {
         $pubkey = '0xEA7EC77Dfa845164D5B54080cFEe6B0d2EFbA3F9';
-        $msg = 'Hello World!';
+        $msg    = 'Hello World!';
         $signed = '0xa49d8d07693312a09cd92ebabdd2e066953f8e0899f1b6e95d849ceac7c0fb8006ca37f92305809df7f5033322b16977aa9963ffff2b3d73a1bc9965926e67ba1c';
         var_dump(strcmp(strtolower($pubkey), Ecrecover::eth_ecRecover($msg, $signed)) === 0);
         $this->assertTrue(true);
@@ -92,8 +93,11 @@ class ToolTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testToWei():void{
-        var_dump(Wei::fromEth(1)->toEth());
+    public function testToWei(): void
+    {
+        $wei = new Wei(1);
+        var_dump($wei->toEth());
         $this->assertTrue(true);
     }
+
 }

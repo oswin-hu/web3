@@ -158,7 +158,7 @@ final class Wei
     }
 
     /**
-     * ormats the current value by the given multiplier.
+     * Formats  the current value by the given multiplier.
      *
      * @param  string  $value
      * @return string
@@ -166,6 +166,7 @@ final class Wei
     private static function mul(string $value): string
     {
         $bigInteger = (new BigInteger($value))->multiply(new BigInteger(1000000000000000000));
+
         return self::format($bigInteger->toString());
     }
 
