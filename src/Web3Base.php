@@ -88,7 +88,7 @@ class Web3Base
             $prefix = $class[1];
         }
 
-        if (in_array($method, $this->allowMethods, true) === false) {
+        if (in_array($method, $this->allowedMethods, true) === false) {
             throw new RuntimeException('The method eth_coinbase does not exist/is not available');
         }
 

@@ -94,14 +94,5 @@ class ToolTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testToWei(): void
-    {
-        $hash = null;
-        if (false) {
-            $hash = '111';
-        }
-        var_dump($hash === null ?: $hash);
-        $this->assertTrue(true);
-    }
 
 }

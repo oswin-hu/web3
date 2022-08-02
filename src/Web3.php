@@ -8,8 +8,6 @@
 
 namespace Web3;
 
-use RuntimeException;
-
 class Web3 extends Web3Base
 {
 

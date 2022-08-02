@@ -78,7 +78,7 @@ class Utils
             }
             $whole = $whole->multiply($bnt);
 
-            switch (BigNumber::getEngine()[0]){
+            switch (BigNumber::getEngine()[0]) {
                 case 'GMP':
                     $powerBase = gmp_pow(gmp_init(10), (int)$fractionLength);
                     break;
@@ -88,7 +88,7 @@ class Utils
                 default:
                     $powerBase = 10 ** (int)$fractionLength;
             }
-            $base = new BigNumber($powerBase);
+            $base     = new BigNumber($powerBase);
             $fraction = $fraction->multiply($bnt)->divide($base)[0];
 
             if (!is_null($negative1)) {
@@ -98,6 +98,30 @@ class Utils
         }
 
         return $bn->multiply($bnt);
+    }
+
+    /**
+     * @param $value
+     * @param  bool  $isPrefix
+     * @return string
+     */
+    public static function toHex($value, bool $isPrefix = false): string
+    {
+        if (is_int($value)) {
+            $bn  = self::toBn($value);
+            $hex = $bn->toHex(true);
+            $hex = preg_replace('/^0+(?!$)/', '', $hex);
+        } elseif (is_string($value)) {
+            $value = Str::stripZero($value);
+            $hex   = implode('', unpack('H*', $value));
+        } elseif ($value instanceof BigNumber) {
+            $hex = $value->toHex(true);
+            $hex = preg_replace('/^0+(?!$)/', '', $hex);
+        } else {
+            throw new InvalidArgumentException('The value to toHex function is not support.');
+        }
+
+        return $isPrefix ? Str::add0x($hex) : $hex;
     }
 
     /**
@@ -131,7 +155,7 @@ class Utils
                     new BigNumber($whole),
                     new BigNumber($fraction),
                     strlen($fraction),
-                    $negative1 ?? null
+                        $negative1 ?? null
                 ];
 
             }

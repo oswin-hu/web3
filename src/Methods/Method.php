@@ -53,7 +53,7 @@ class Method extends JsonRCP implements IMethod
     {
         foreach ($data as $k => $v) {
             if (isset($format[$k])) {
-                $formatted = call_user_func([$format[$k], 'format'], $data);
+                $formatted = call_user_func([$format[$k], 'format'], $v);
                 $data[$k]  = $formatted;
             }
         }
