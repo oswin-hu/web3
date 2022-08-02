@@ -8,6 +8,7 @@
 
 namespace Test;
 
+use kornrunner\Keccak;
 use Web3\Tool\Ecrecover;
 use Web3\Tool\Str;
 use Web3\Tool\Utils;
@@ -95,9 +96,11 @@ class ToolTest extends TestCase
 
     public function testToWei(): void
     {
-//        var_dump(gmp_init('0x0de0b6b3a7640000'));
-        $wei = Wei::fromEth('0x0de0b6b3a7640000');
-        var_dump($wei->toEth());
+        $hash = null;
+        if (false) {
+            $hash = '111';
+        }
+        var_dump($hash === null ?: $hash);
         $this->assertTrue(true);
     }
 
