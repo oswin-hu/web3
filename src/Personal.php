@@ -11,4 +11,10 @@ namespace Web3;
 final class Personal extends Web3Base
 {
 
+    protected array $allowedMethods = [
+        'personal_newAccount',
+        'personal_listAccounts',
+        'personal_lockAccount',
+        'personal_sign'
+    ];
 }

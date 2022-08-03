@@ -89,7 +89,7 @@ class Web3Base
         }
 
         if (in_array($method, $this->allowedMethods, true) === false) {
-            throw new RuntimeException('The method eth_coinbase does not exist/is not available');
+            throw new RuntimeException('The method '.$method.' does not exist/is not available');
         }
 
         $className = sprintf("Web3\Methods\%s\%s", ucfirst($prefix), ucfirst($name));

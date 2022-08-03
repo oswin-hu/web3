@@ -33,7 +33,8 @@ class Http extends Transporter implements Ihttp
          */
         $stream   = $res->getBody();
         $response = json_decode($stream, true, 512, JSON_THROW_ON_ERROR);
-
+        print_r($response);
+        exit;
         $stream->close();
 
         if (JSON_ERROR_NONE !== json_last_error()) {
