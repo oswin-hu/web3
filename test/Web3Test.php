@@ -23,7 +23,8 @@ class Web3Test extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testSha3():void{
+    public function testSha3(): void
+    {
         $res = $this->web3->sha3('hello world');
         var_dump($res);
         $res = $this->web3->web3_sha3('hello world');

@@ -101,34 +101,10 @@ class Utils
     }
 
     /**
-     * @param $value
-     * @param  bool  $isPrefix
-     * @return string
-     */
-    public static function toHex($value, bool $isPrefix = false): string
-    {
-        if (is_int($value)) {
-            $bn  = self::toBn($value);
-            $hex = $bn->toHex(true);
-            $hex = preg_replace('/^0+(?!$)/', '', $hex);
-        } elseif (is_string($value)) {
-            $value = Str::stripZero($value);
-            $hex   = implode('', unpack('H*', $value));
-        } elseif ($value instanceof BigNumber) {
-            $hex = $value->toHex(true);
-            $hex = preg_replace('/^0+(?!$)/', '', $hex);
-        } else {
-            throw new InvalidArgumentException('The value to toHex function is not support.');
-        }
-
-        return $isPrefix ? Str::add0x($hex) : $hex;
-    }
-
-    /**
      * @param $number
      * @return array|BigNumber
      */
-    private static function toBn($number)
+    public static function toBn($number)
     {
         if ($number instanceof BigNumber) {
             $bn = $number;

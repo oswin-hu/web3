@@ -20,7 +20,7 @@ class HexFormatter implements IFormatter
         $value = mb_strtolower($value);
 
         if (Str::isZeroPrefixed($value) === false) {
-            $value = Utils::toHex($value, true);
+            $value = Str::toHex($value, true);
         }
 
         return $value;

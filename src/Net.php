@@ -10,5 +10,9 @@ namespace Web3;
 
 final class Net extends Web3Base
 {
-
+    protected array $allowedMethods = [
+        'net_version',
+        'net_peerCount',
+        'net_listening'
+    ];
 }

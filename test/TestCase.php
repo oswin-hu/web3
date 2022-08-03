@@ -10,6 +10,9 @@
 namespace Test;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
+use Web3\Eth;
+use Web3\Net;
+use Web3\Personal;
 use Web3\Web3;
 
 class TestCase extends BaseTestCase
@@ -19,6 +22,21 @@ class TestCase extends BaseTestCase
      * @var Web3
      */
     protected Web3 $web3;
+
+    /**
+     * @var Eth
+     */
+    protected Eth $eth;
+
+    /**
+     * @var Net
+     */
+    protected Net $net;
+
+    /**
+     * @var Personal
+     */
+    protected Personal $personal;
 
     /**
      * @var string
@@ -35,10 +53,9 @@ class TestCase extends BaseTestCase
      */
     protected string $coinbase;
 
-    public function setUp():void
+    public function setUp(): void
     {
         $this->web3 = new Web3($this->testRinkebyHost);
-//        $this->coinbase = $this->web3->eth->coinbase();
     }
 
 

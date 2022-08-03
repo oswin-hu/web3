@@ -29,7 +29,7 @@ class Http extends Transporter implements Ihttp
         $res = $this->client->post($this->host, $this->options($payload));
 
         /**
-         * @var StreamInterface;
+         * @var StreamInterface $res ;
          */
         $stream   = $res->getBody();
         $response = json_decode($stream, true, 512, JSON_THROW_ON_ERROR);

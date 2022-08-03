@@ -10,7 +10,9 @@
 namespace Web3\Tool;
 
 use Exception;
+use InvalidArgumentException;
 use kornrunner\Keccak;
+use phpseclib3\Math\BigInteger as BigNumber;
 
 class Str
 {
@@ -136,5 +138,30 @@ class Str
         }
         return $hash;
 
+    }
+
+
+    /**
+     * @param $value
+     * @param  bool  $isPrefix
+     * @return string
+     */
+    public static function toHex($value, bool $isPrefix = false): string
+    {
+        if (is_int($value)) {
+            $bn  = Utils::toBn($value);
+            $hex = $bn->toHex(true);
+            $hex = preg_replace('/^0+(?!$)/', '', $hex);
+        } elseif (is_string($value)) {
+            $value = self::stripZero($value);
+            $hex   = implode('', unpack('H*', $value));
+        } elseif ($value instanceof BigNumber) {
+            $hex = $value->toHex(true);
+            $hex = preg_replace('/^0+(?!$)/', '', $hex);
+        } else {
+            throw new InvalidArgumentException('The value to toHex function is not support.');
+        }
+
+        return $isPrefix ? self::add0x($hex) : $hex;
     }
 }

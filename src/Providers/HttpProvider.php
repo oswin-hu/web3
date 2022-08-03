@@ -21,7 +21,15 @@ class HttpProvider extends Provider implements IProvider
     public function send(Method $method)
     {
         $payload = $method->toPayloadString();
-        return $this->transporter->request($payload);
+        $res =  $this->transporter->request($payload);
+
+        if (is_array($res)) {
+            $res = $method->transform($res, $method->getOutputFormatters());
+        } else {
+            $res = $method->transform([$res], $method->getOutputFormatters())[0];
+        }
+
+        return $res;
     }
 
 }
