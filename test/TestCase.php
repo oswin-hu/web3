@@ -46,7 +46,7 @@ class TestCase extends BaseTestCase
     /**
      * @var string
      */
-    protected string $testHost = '';
+    protected string $testHost = 'http://ganache:8545/';
 
     /**
      * @var string

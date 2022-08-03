@@ -21,10 +21,6 @@ class Web3 extends Web3Base
      */
     protected ?Net $net = null;
 
-    /**
-     * @var Personal|null
-     */
-    protected ?Personal $personal = null;
 
     protected array $allowedMethods = [
         'web3_clientVersion',
@@ -58,18 +54,5 @@ class Web3 extends Web3Base
         return $this->net;
     }
 
-    /**
-     * getPersonal
-     *
-     * @return Personal|null
-     */
-    public function getPersonal(): ?Personal
-    {
-        if (is_null($this->personal)) {
-            $this->personal = new Personal($this->provider);
-        }
-
-        return $this->personal;
-    }
 
 }
