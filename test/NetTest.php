@@ -40,16 +40,33 @@ class NetTest extends TestCase
     {
         $res = $this->web3->net->peerCount();
         var_dump($res);
-//        $res = $this->web3->net->net_peerCount();
-//        var_dump($res);
-//        $res = $this->web3->getNet()->peerCount();
-//        var_dump($res);
-//        $res = $this->web3->getNet()->net_peerCount();
-//        var_dump($res);
-//        $res = $this->net->peerCount();
-//        var_dump($res);
-//        $res = $this->net->net_peerCount();
-//        var_dump($res);
+        $res = $this->web3->net->net_peerCount();
+        var_dump($res);
+        $res = $this->web3->getNet()->peerCount();
+        var_dump($res);
+        $res = $this->web3->getNet()->net_peerCount();
+        var_dump($res);
+        $res = $this->net->peerCount();
+        var_dump($res);
+        $res = $this->net->net_peerCount();
+        var_dump($res);
+        $this->assertTrue(true);
+    }
+
+    public function testListening(): void
+    {
+        $res = $this->web3->net->listening();
+        var_dump($res);
+        $res = $this->web3->net->net_listening();
+        var_dump($res);
+        $res = $this->web3->getNet()->listening();
+        var_dump($res);
+        $res = $this->web3->getNet()->net_listening();
+        var_dump($res);
+        $res = $this->net->listening();
+        var_dump($res);
+        $res = $this->net->net_listening();
+        var_dump($res);
         $this->assertTrue(true);
     }
 }

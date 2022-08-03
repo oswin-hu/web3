@@ -8,7 +8,6 @@
 
 namespace Web3\Formatters;
 
-use phpseclib3\Math\BigInteger;
 use Web3\Tool\Utils;
 
 class BigNumberFormatter implements IFormatter
