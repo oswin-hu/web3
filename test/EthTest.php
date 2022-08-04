@@ -36,4 +36,11 @@ class EthTest extends TestCase
         var_dump($res);
         $this->assertTrue(true);
     }
+
+    public function testBlockNumber(): void
+    {
+        $res = $this->web3->eth->blockNumber();
+        var_dump($res);
+        $this->assertTrue(true);
+    }
 }

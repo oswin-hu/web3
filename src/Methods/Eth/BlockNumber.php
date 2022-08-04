@@ -1,18 +1,19 @@
 <?php
 /**
  * Author: oswin
- * Time: 2022/8/3-15:04
+ * Time: 2022/8/4-14:25
  * Description:
  * Version: v1.0
  */
 
-namespace Web3\Methods\Net;
+namespace Web3\Methods\Eth;
 
 use Web3\Formatters\BigNumberFormatter;
 use Web3\Methods\Method;
 
-class PeerCount extends Method
+class BlockNumber extends Method
 {
+
     /**
      * @inheritdoc
      */

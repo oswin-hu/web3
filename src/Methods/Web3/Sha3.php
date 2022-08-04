@@ -13,7 +13,9 @@ use Web3\Methods\Method;
 
 class Sha3 extends Method
 {
-
+    /**
+     * @inheritdoc
+     */
     protected array $inputFormatters = [
         HexFormatter::class
     ];
