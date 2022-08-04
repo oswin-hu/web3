@@ -14,7 +14,9 @@ use Web3\Web3;
 
 class Web3Test extends TestCase
 {
-    public function testWeb3(): void
+
+
+    public function testClientVersion(): void
     {
         $res = $this->web3->clientVersion();
         var_dump($res);
