@@ -33,10 +33,6 @@ class TestCase extends BaseTestCase
      */
     protected Net $net;
 
-    /**
-     * @var Personal
-     */
-    protected Personal $personal;
 
     /**
      * @var string
