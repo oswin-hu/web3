@@ -54,6 +54,7 @@ final class Eth extends Web3Base
         'eth_getFilterLogs',
         'eth_getLogs',
         'eth_submitWork',
-        'eth_submitHashrate'
+        'eth_submitHashrate',
+        'eth_chainId'
     ];
 }
