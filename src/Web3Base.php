@@ -23,6 +23,11 @@ class Web3Base
     protected Provider $provider;
 
     /**
+     * @var string
+     */
+    protected string $privateKey = '';
+
+    /**
      * @var array
      */
     protected array $allowedMethods = [];
@@ -35,7 +40,7 @@ class Web3Base
     public function __construct($provider)
     {
         if (is_string($provider) && (filter_var($provider, FILTER_VALIDATE_URL)) && preg_match('/^https?:\/\//', $provider) === 1) {
-            $http = new Http($provider);
+            $http           = new Http($provider);
             $this->provider = new HttpProvider($http);
         } elseif ($provider instanceof Provider) {
             $this->provider = $provider;
@@ -65,6 +70,27 @@ class Web3Base
     }
 
     /**
+     * setPrivateKey
+     *
+     * @param  string  $privateKey
+     * @return void
+     */
+    public function setPrivateKey(string $privateKey): void
+    {
+        $this->privateKey = $privateKey;
+    }
+
+    /**
+     * getPrivateKey
+     *
+     * @return string
+     */
+    public function getPrivateKey(): string
+    {
+        return $this->privateKey;
+    }
+
+    /**
      * __call
      *
      * @param $name
@@ -78,11 +104,11 @@ class Web3Base
             throw new RuntimeException('Please set provider first.');
         }
 
-        if (preg_match('/^(web3|personal|eth|net)_+[a-zA-Z\d]+$/', $name) === 1){
+        if (preg_match('/^(web3|personal|eth|net)_+[a-zA-Z\d]+$/', $name) === 1) {
             $method = $name;
             [$prefix, $name] = explode('_', $method);
         } else {
-            $class = explode('\\', static::class);
+            $class  = explode('\\', static::class);
             $method = strtolower($class[1]).'_'.$name;
             $prefix = $class[1];
         }
@@ -92,12 +118,12 @@ class Web3Base
         }
 
         $className = sprintf("Web3\Methods\%s\%s", ucfirst($prefix), ucfirst($name));
-        if (class_exists($className) === false){
+        if (class_exists($className) === false) {
             $className = Method::class;
         }
 
         $classMethod = new $className($method, $arguments);
-        $inputs = $classMethod->transform($arguments, $classMethod->getInputFormatters());
+        $inputs      = $classMethod->transform($arguments, $classMethod->getInputFormatters());
         $classMethod->setArguments($inputs);
         return $this->provider->send($classMethod);
     }
