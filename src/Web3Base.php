@@ -65,7 +65,7 @@ class Web3Base
     }
 
     /**
-     *
+     * __call
      *
      * @param $name
      * @param $arguments
@@ -77,7 +77,6 @@ class Web3Base
         if (empty($this->provider)) {
             throw new RuntimeException('Please set provider first.');
         }
-
 
         if (preg_match('/^(web3|personal|eth|net)_+[a-zA-Z\d]+$/', $name) === 1){
             $method = $name;
