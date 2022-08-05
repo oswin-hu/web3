@@ -237,4 +237,21 @@ class Str
 
         return $decVal;
     }
+
+    /**
+     * 字符串长度 ‘0’左补齐
+     *
+     * @param  string  $str
+     * @param  int  $bit
+     * @return string
+     */
+    public static function fillZero(string $str, int $bit = 64): string
+    {
+        $realStr = '';
+        if ($str !== '') {
+            $realStr = str_pad($str, $bit, 0, STR_PAD_LEFT);
+        }
+
+        return $realStr;
+    }
 }
