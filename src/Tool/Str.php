@@ -164,4 +164,77 @@ class Str
 
         return $isPrefix ? self::add0x($hex) : $hex;
     }
+
+    /**
+     * 转为十六进制
+     *
+     * @param  string  $value
+     * @param  bool  $mark
+     * @return string
+     */
+    public static function decToHex(string $value, bool $mark = true): string
+    {
+        $hexArr = [
+            '0',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+            'a',
+            'b',
+            'c',
+            'd',
+            'e',
+            'f'
+        ];
+        $hexVal = '';
+        while ($value !== 0) {
+            $hexVal = $hexArr[bcmod($value, 16)].$hexVal;
+            $value  = bcdiv($value, '16', 0);
+        }
+
+        return $mark ? self::add0x($hexVal) : $hexVal;
+    }
+
+    /**
+     * 转为十进制
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public static function hexToDec(string $value): string
+    {
+        $value  = self::remove0x(strtolower($value));
+        $decArr = [
+            '0' => '0',
+            '1' => '1',
+            '2' => '2',
+            '3' => '3',
+            '4' => '4',
+            '5' => '5',
+            '6' => '6',
+            '7' => '7',
+            '8' => '8',
+            '9' => '9',
+            'a' => '10',
+            'b' => '11',
+            'c' => '12',
+            'd' => '13',
+            'e' => '14',
+            'f' => '15'
+        ];
+        $decVal = '0';
+        $value  = strrev($value);
+        $imax   = mb_strlen($value);
+        for ($i = 0; $i < $imax; $i++) {
+            $decVal = bcadd(bcmul(bcpow('16', $i, 0), $decArr[$value[$i]]), $decVal);
+        }
+
+        return $decVal;
+    }
 }
