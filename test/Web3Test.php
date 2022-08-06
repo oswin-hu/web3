@@ -8,9 +8,7 @@
 
 namespace Test;
 
-use Web3\Methods\Eth;
-use Web3\Transporters\Http;
-use Web3\Web3;
+use Web3\Tool\Str;
 
 class Web3Test extends TestCase
 {
