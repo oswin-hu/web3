@@ -9,6 +9,7 @@
 namespace Web3;
 
 use JsonException;
+use Web3\Tool\Validator;
 
 final class Contract extends Web3Base
 {
@@ -48,6 +49,13 @@ final class Contract extends Web3Base
     protected string $toAddress;
 
     /**
+     * defaultBlock
+     *
+     * @var mixed
+     */
+    protected $defaultBlock;
+
+    /**
      * __construct
      *
      * @param $provider
@@ -59,6 +67,33 @@ final class Contract extends Web3Base
     {
         parent::__construct($provider);
         $this->setAbi($abi);
+    }
+
+    /**
+     * getDefaultBlock
+     *
+     * @return string
+     */
+    public function getDefaultBlock(): string
+    {
+        return $this->defaultBlock;
+    }
+
+    /**
+     * setDefaultBlock
+     *
+     * @param  string  $defaultBlock
+     * @return $this
+     */
+    public function setDefaultBlock(string $defaultBlock): Contract
+    {
+        $this->defaultBlock = 'latest';
+
+        if (Validator::tag($defaultBlock) || Validator::quantity($defaultBlock)) {
+            $this->defaultBlock = $defaultBlock;
+        }
+
+        return $this;
     }
 
     /**
@@ -142,6 +177,18 @@ final class Contract extends Web3Base
     public function getConstructor(): array
     {
         return $this->constructor;
+    }
+
+    /**
+     * at
+     *
+     * @param  string  $address
+     * @return $this
+     */
+    public function at(string $address): Contract
+    {
+        $this->toAddress = $address;
+        return $this;
     }
 
 
