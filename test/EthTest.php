@@ -8,6 +8,7 @@
 
 namespace Test;
 
+use kornrunner\Keccak;
 use Web3\Eth;
 use Web3\Net;
 use Web3\Tool\Utils;
@@ -57,6 +58,12 @@ class EthTest extends TestCase
 
     public function testCall(): void
     {
+
+        var_dump(gmp_init('0x9184e72a000'));
+        $hash = Keccak::hash("eth_call",256);
+        $hash_sub = mb_substr($hash,0,8,'utf-8');
+        var_dump($hash_sub);
+
         '{
     "jsonrpc":"2.0",
     "method":"eth_call",
