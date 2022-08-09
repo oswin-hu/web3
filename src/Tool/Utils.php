@@ -15,7 +15,7 @@ class Utils
      *
      * @const array
      */
-    const UNITS = [
+    public const UNITS = [
         'noether'    => '0',
         'wei'        => '1',
         'kwei'       => '1000',
@@ -86,7 +86,7 @@ class Utils
                     $powerBase = bcpow('10', (string)$fractionLength, 10);
                     break;
                 default:
-                    $powerBase = 10 ** (int)$fractionLength;
+                    $powerBase = 10 * (int)$fractionLength;
             }
             $base     = new BigNumber($powerBase);
             $fraction = $fraction->multiply($bnt)->divide($base)[0];

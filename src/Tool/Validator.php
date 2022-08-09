@@ -63,4 +63,20 @@ class Validator
     {
         return (preg_match('/^0x[a-fA-F0-9]{16}$/', $value) >= 1);
     }
+
+    public static function call(array $value):void{
+        $rtn = true;
+
+        if (!empty($value['from']) && static::address($value['from']) === false) {
+            $rtn = false;
+        }
+
+        if (!isset($value['to']) || static::address($value['to']) === false) {
+            $rtn = false;
+        }
+
+
+
+
+    }
 }
