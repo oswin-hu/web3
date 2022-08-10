@@ -25,6 +25,11 @@ class JsonRCP implements RPC
     protected string $rpcVersion = '2.0';
 
     /**
+     * @var string
+     */
+    protected string $privateKey = '';
+
+    /**
      * @var int
      */
     protected int $id = 0;
@@ -39,6 +44,28 @@ class JsonRCP implements RPC
     {
         $this->method    = $method;
         $this->arguments = $arguments;
+    }
+
+
+    /**
+     * setPrivateKey
+     *
+     * @param  string  $privateKey
+     * @return void
+     */
+    public function setPrivateKey(string $privateKey): void
+    {
+        $this->privateKey = $privateKey;
+    }
+
+    /**
+     * getPrivateKey
+     *
+     * @return string
+     */
+    public function getPrivateKey(): string
+    {
+        return $this->privateKey;
     }
 
     /**

@@ -123,6 +123,7 @@ class Web3Base
         }
 
         $classMethod = new $className($method, $arguments);
+        $classMethod->setPrivateKey($this->privateKey);
         $inputs      = $classMethod->transform($arguments, $classMethod->getInputFormatters());
         $classMethod->setArguments($inputs);
         return $this->provider->send($classMethod);

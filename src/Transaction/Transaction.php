@@ -17,6 +17,12 @@ class Transaction implements ITransaction
     protected string $privateKey = '';
 
     /**
+     *
+     * @var array
+     */
+    protected array $abiMethod = [];
+
+    /**
      * __construct
      *
      * @param  string  $privateKey
@@ -26,14 +32,21 @@ class Transaction implements ITransaction
         $this->privateKey = $privateKey;
     }
 
-    public function getAbiMethod(): string
+    public function getAbiMethod(): array
     {
-        return  '';
+        return $this->abiMethod;
+    }
+
+    public function setAbiMethod(array $method): void
+    {
+        if (empty($method)) {
+
+        }
     }
 
     public function getData(array $trans): string
     {
-        return  '';
+        return '';
     }
 
     public function sign(string $priKey, array $data): string

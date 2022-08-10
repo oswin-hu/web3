@@ -15,5 +15,5 @@ class TransactionFormatter implements IFormatter
     {
         return $value;
     }
-    
+
 }
