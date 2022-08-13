@@ -17,4 +17,5 @@ class SendTransaction extends Method
     protected array $inputFormatters = [
         TransactionFormatter::class
     ];
+
 }

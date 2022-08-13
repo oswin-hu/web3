@@ -26,6 +26,7 @@ class Method extends JsonRCP implements IMethod
      */
     protected array $outputFormatters = [];
 
+
     /**
      * getInputFormatters
      *
@@ -58,6 +59,9 @@ class Method extends JsonRCP implements IMethod
             }
         }
 
+        if (method_exists($this, 'trade')) {
+           $data = $this->trade($data);
+        }
         return $data;
     }
 }
